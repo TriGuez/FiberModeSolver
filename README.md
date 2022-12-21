@@ -25,4 +25,6 @@ As it can be seen in fig.1, results are very similar, leading to a mean squared 
 * [1] K. N. Park et K. S. Lee, « Improved effective-index method for analysis of photonic crystal fibers », Opt. Lett., vol. 30, nᵒ 9, p. 958, mai 2005, doi: 10.1364/OL.30.000958.
 
 * [2] T. Gottschall et al., « Ultra‐compact tunable fiber laser for coherent anti‐Stokes Raman imaging », J Raman Spectrosc, vol. 52, nᵒ 9, p. 1561‑1568, sept. 2021, doi: 10.1002/jrs.6171.
+## Citation
+If this code was helpful, please consider citing it : 
 
