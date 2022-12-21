@@ -7,10 +7,10 @@ function [neff, LP] = ModeSolver(RImap, x, y, varargin)
     target = 0;
     IndexContour = true;
     for ii = 1:2:numel(varargin)
-        switch(varargin{ii})
-            case 'nModes'
+        switch(lower(varargin{ii}))
+            case 'nmodes'
                 nModes = varargin{ii+1};
-            case 'coreRadius'
+            case 'coreradius'
                 coreRadius = varargin{ii+1};
             case 'lambda'
                 lambda = varargin{ii+1};
@@ -18,7 +18,7 @@ function [neff, LP] = ModeSolver(RImap, x, y, varargin)
                 plot = varargin{ii+1};
             case 'target'
                 target = varargin{ii+1};
-            case 'IndexContour'
+            case 'indexcontour'
                 IndexContour = varargin{ii+1};
             otherwise
                 error('Unknown argument ''%s'' ', varargin{ii})
