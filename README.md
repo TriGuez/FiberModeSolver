@@ -21,6 +21,13 @@ As it can be seen in fig.1, results are very similar, leading to a mean squared 
 | :--: |
 | Fig. 1 : $n_{eff}$ comparison |
 
+## Examples
+
+| ![105-125](https://user-images.githubusercontent.com/121152666/208956926-1cf9dd6c-3573-42bd-a34e-04c2bc26257e.gif) |
+| :--: |
+| First 50 modes of a 105-125, 0.22 NA optical fiber |
+
+
 ## References
 * [1] K. N. Park et K. S. Lee, « Improved effective-index method for analysis of photonic crystal fibers », Opt. Lett., vol. 30, nᵒ 9, p. 958, mai 2005, doi: 10.1364/OL.30.000958.
 
