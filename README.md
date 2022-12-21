@@ -22,10 +22,25 @@ As it can be seen in fig.1, results are very similar, leading to a mean squared 
 | Fig. 1 : $n_{eff}$ comparison |
 
 ## Examples
-
+```Matlab
+MMFStandard.m
+```
 | ![105-125](https://user-images.githubusercontent.com/121152666/208956926-1cf9dd6c-3573-42bd-a34e-04c2bc26257e.gif) |
 | :--: |
 | First 50 modes of a 105-125, 0.22 NA optical fiber |
+
+```Matlab
+PCFStandard.m
+```
+| ![PCF](https://user-images.githubusercontent.com/121152666/208959172-effad89e-656c-4b68-8438-71d4f5946f5d.gif) |
+| :--: |
+| First 3 modes of an air-silica microstructured fiber |
+```Matlab
+ARFStandard.m
+```
+| ![image](https://user-images.githubusercontent.com/121152666/208961055-6e369851-90c2-4407-8989-519724f215ff.png) |
+| :--: |
+| Fundamental mode of a generic antiresonnant fiber |
 
 
 ## References
