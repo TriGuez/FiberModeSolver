@@ -28,7 +28,7 @@ ylabel('y (µm)')
 colormap gray
 
 %% Run the simulation
-nModes = 50; 
+nModes = 5; 
 n_target = sqrt(SilicaIndex(lambda)^2+NA^2); % Since the mode is propagating in the core, its effective index can't be higher than the refractive index
 
 [neff, LP] = ModeSolver(RIndexMap, x, y, 'lambda', lambda, 'nModes', ...
