@@ -102,7 +102,8 @@ Aeff = ModeArea(x, y, Field)
 ```
 Description : 
 
-This function computes the effective area of the considered optical field, with : $$ A_{eff} =  {\Big({\int{\int{\vert E\vert^{2}}} dxdy\Big)^{2}}\over{\int{\int{\vert E\vert^{4}dxdy}}}}\ \ \ \ \ \ \ \ \ \  \textbf{(3)}$$
+This function computes the effective area of the considered optical field, with : 
+$$A_{eff} =  {\Big({\int{\int{\vert E\vert^{2}}} dxdy\Big)^{2}}\over{\int{\int{\vert E\vert^{4}dxdy}}}}\ \ \ \ \ \ \ \ \ \  \textbf{(3)}$$
 
 Inputs : 
 
