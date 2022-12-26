@@ -210,3 +210,8 @@ Output :
 ## Citation
 If this code was helpful, please consider citing it : 
 
+
+[![DOI](https://zenodo.org/badge/580677271.svg)](https://zenodo.org/badge/latestdoi/580677271)
+
+
+
