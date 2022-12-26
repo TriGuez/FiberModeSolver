@@ -1,5 +1,16 @@
 function MFD = ModeFieldDiameter(x,y,Field,varargin)
-    
+
+%%    Description : 
+%%
+%%    This function computes the mode field diameter of a given optical mode, using the specified definition (default is 4 $\sigma$)
+%%    
+%%    Inputs :     
+%%    * x, y : Transverse coordinates of the simulation (m)
+%%    * Field : Matrix of the considered optical field or optical instensity
+%%    * [OPTIONAL] type : MFD definition. Options are : '4sigma' (default), '1/e', '1/e2', 'FWHM'
+%%    
+%%    Outputs :   
+%%    * MFD : Computed mode field diameter    
 type = '4sigma';
     for ii=1:numel(varargin)
         switch varargin{ii}

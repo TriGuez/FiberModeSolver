@@ -1,5 +1,15 @@
 function [index] = SilicaIndex(lambda) 
 
+%%    Description : 
+%%
+%%    This function computes the refractive index of fused silica corresponding to the given wavelength, using Sellmeier's formula.
+%%    
+%%    Input : 
+%%    * lambda : Working wavelength (m)
+%%    
+%%    Output : 
+%%    * Corresponding refractive index
+
 lambda = lambda*1e6;
 
 sl1= 68.4043*1e-3;  sa1=0.6961663; 

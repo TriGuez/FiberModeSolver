@@ -1,16 +1,22 @@
-function n = ARFIndex(X,Y, nParameters)
+function n = ARFIndex(X,Y, FiberParams)
+%% This function creates the refractive index profile of a fused silica made anti-resonnant fiber, including material optical losses (i.e complex refractive index)
+%% Inputs : 
+%% - X, Y : spatial grid
+%% - FiberParams : Matlab struct with fields : {1} Cladding diameter, {2} number of capillaries, {3} Outter capillaries diameter, {4} capillaries thickness, {5} Working wavelength
+%% Outputs : 
+%% - n : Refractive index profile of the fiber
 
-Dclad = nParameters{1};
-Ncap = nParameters{2};
-DextCap = nParameters{3};
-Ecap = nParameters{4};
-lbd = nParameters{5};
+Dclad = FiberParams{1};
+Ncap = FiberParams{2};
+DextCap = FiberParams{3};
+Ecap = FiberParams{4};
+lbd = FiberParams{5};
 
 Rclad = Dclad/2;
 Rcap = DextCap/2;
 RintCap = Rcap - Ecap;
 alpha = SilicaLosses(lbd)*4.343;
-kappa = (alpha.*log(10)/20)*(nParameters{5})/(2*pi);
+kappa = (alpha.*log(10)/20)*(FiberParams{5})/(2*pi);
 n = (SilicaIndex(lbd)+1i*kappa).*ones(size(X));
 n(X.^2+Y.^2<(Dclad/2).^2) = 1;
 alpha = 2*pi/Ncap;

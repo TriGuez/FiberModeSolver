@@ -1,4 +1,4 @@
-%% This script computes the modes of a slightly multimode photonic crystal fiber
+%% This script gives an example of a multi-wavelength simulation
 clear
 close all
 format long g
@@ -23,8 +23,8 @@ RIndexMap = PCFIndex(X, Y, fiberParams);
 % Plot RIMap to check if the simulation window is big enough
 figure()
 imagesc(x*1e6, y*1e6, real(RIndexMap)) % Index is complex since it takes material losses into account
-xlabel('x (µm)')
-ylabel('y (µm)')
+xlabel('x (ï¿½m)')
+ylabel('y (ï¿½m)')
 colormap gray
 
 %% Run the simulation
@@ -44,3 +44,19 @@ for jk = 1:256
     losses(jk) = (20*imag(neff))./log(10) * 2*pi/lambda(jk);
     aeff(jk) = ModeArea(x, y, LP);
 end
+
+%% Plotting results 
+figure()
+plot(lambda.*1e9, neff)
+xlabel('Wavelength (nm)')
+ylabel('n_{eff}')
+grid on
+grid minor
+figure()
+yyaxis left
+plot(lambda*1e9, aeff.*1e12)
+xlabel('Wavelength')
+ylabel('A_{eff} (Âµm^{2})')
+yyaxis right
+plot(lambda*1e9, losses.*4.343)
+ylabel('Attenuation (dB.m^{-1})')

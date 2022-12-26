@@ -1,14 +1,22 @@
-function n = PCFIndex(X,Y, nParameters)
+function n = PCFIndex(X,Y, FiberParams)
+%% This function creates the refractive index profile of an air silica photonic crystal fiber (One hole missing triangular lattice, 5 rows of holes), including material optical losses (i.e complex refractive index)
+%% Inputs : 
+%% * X, Y : spatial mesh
+%% * FiberParams : Matlab structure with fields : {1} lattice pitch (m), {2} $d\over \Lambda$ parameter, {3} Working wavelength (m), {4} Cladding diameter
+%%
+%% Output : 
+%% * n : Refractive index map 
+
 format long g
-pitch = nParameters{1};
-d_over_pitch = nParameters{2};
-dclad = nParameters{4};
+pitch = FiberParams{1};
+d_over_pitch = FiberParams{2};
+dclad = FiberParams{4};
 d = d_over_pitch.*pitch;
-n_background = SilicaIndex(nParameters{3});
+n_background = SilicaIndex(FiberParams{3});
 n = ones(size(X));
 n(X.^2+Y.^2<(dclad/2).^2) = n_background;
-alpha = SilicaLosses(nParameters{3})*4.343;
-kappa = (alpha.*log(10)/20)*(nParameters{3})/(2*pi);
+alpha = SilicaLosses(FiberParams{3})*4.343;
+kappa = (alpha.*log(10)/20)*(FiberParams{3})/(2*pi);
 n = n + 1i*kappa;
 
 % first ring

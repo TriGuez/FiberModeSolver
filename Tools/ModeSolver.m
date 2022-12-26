@@ -1,4 +1,26 @@
 function [neff, LP] = ModeSolver(RImap, x, y, varargin)
+    
+%% Description : 
+%%
+%% This script is the main solver, based on finite difference scheme for eq (1)
+%%
+%% Inputs : 
+%%
+%% * RIMap : Refractive index map of an arbitrary optical fiber
+%% * x, y : Transverse coordinates of the simulation (m)
+%% * [OPTIONAL]
+%% * 'nModes' : Amount of mode to compute. has to be increased if the solver did not converged. Default is 10
+%% * 'coreRadius' : Core radius of the considered fiber, used to evacuate cladding modes. Default is 5e-6
+%% * 'lambda' : Working wavelength. Default is 1064e-9
+%% * 'plot' : Enables the display of the computed modes. Set to false to increase speed, especially for large amount of modes. Default is true
+%% * 'target' : Highest value for the effective index to compute. If set to 0, the eigenvalue solver will look for the highest real part eigenvalue. Default is 0
+%% * 'indexContour : Enables the display of the optical fiber section over the mode plot. Default is true
+%%
+%% Outputs : 
+%%
+%% * neff : Effective index of the computed modes
+%% * LP : Corresponding core modes
+
     warning('off','all');
     nModes = 10;
     coreRadius = 5e-6;
