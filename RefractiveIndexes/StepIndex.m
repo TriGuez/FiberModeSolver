@@ -9,8 +9,8 @@ function n = StepIndex(X, Y, FiberParams)
 %% Output : 
 %%* n : Refractive index map 
 
-Dcore = FiberParams{1}; Dclad = FiberParams{2}; NA = FiberParams{3};
-lambda = FiberParams{4};
+Dcore = FiberParams.Dcore; Dclad = FiberParams.Dclad; NA = FiberParams.NA;
+lambda = FiberParams.lambda;
 alpha = SilicaLosses(lambda)*4.343;
 kappa = (alpha.*log(10)/20)*(lambda)/(2*pi);
 nClad = SilicaIndex(lambda);

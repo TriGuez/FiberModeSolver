@@ -56,10 +56,62 @@ This function creates the refractive index profile of a fused silica made anti-r
 
 Inputs : 
 * X, Y : spatial mesh
-* FiberParams : Matlab structure with fields : {1} Cladding diameter, {2} number of capillaries, {3} Outter diameter of the capillaries, {4} Capillaries thickness, {5} Working wavelength (m)
+* FiberParams : Matlab structure with fields : Dclad : Cladding diameter, NCap : number of capillaries, DextCap : Outter diameter of the capillaries, ECap : Capillaries thickness, lambda : Working wavelength (m)
 
 Output : 
 * n : Refractive index map 
+
+### - ASBandgapIndex.m
+Usage : 
+```Matlab
+n = ASBandgapIndex(X, Y, FiberParams)
+```
+
+Description : 
+
+This function creates the refractive index profile of an all-solid photonic bandgap fiber (hexagonal lattice of high-index parabolic inclusions), including material optical losses (i.e complex refractive index)
+
+Inputs : 
+* X, Y : spatial mesh
+* FiberParams : Matlab structure with fields : Pitch : lattice pitch (m), dop : $d\over \Lambda$ parameter, dn : refractive index difference of the high index inclusions, Dclad : Cladding diameter, lambda : working wavelength (m)
+
+Outputs : 
+* n : Refractive index map
+
+### - BendedIndex.m
+Usage : 
+```Matlab
+n = BendedIndex(X, Y, RIndexMap, BendingParams)
+```
+
+Description : 
+
+This function computes the impact of bending on a given refractive index profile according to [3].
+
+Inputs : 
+* X, Y : spatial mesh
+* RIndexMap : Input refractive index profile
+* BendingParams : Matlab structure with fields : R : Bending radius (m), Angle : Angle between bending direction & the horizontal direction (rad).
+
+Outputs : 
+* n : Bended refractive index profile
+
+### - ParabolicIndex.m
+Usage :
+```Matlab
+n = ParabolicIndex(X, Y, FiberParams)
+```
+
+Description : 
+
+This function creates the refractive index profile of a parabolic graded index fiber, including material losses (i.e complex refractive index)
+
+Inputs : 
+* X, Y : spatial mesh
+* FiberParams : Matlab structure with fields : Dcore : Core diameter (m), Dclad : Cladding diameter (m), dn : Refractive index difference of the parabola, lambda : WOrking wavelength (m)
+
+Outputs : 
+* n : refractive index profile
 
 ### - PCFIndex.m
 Usage : 
@@ -72,7 +124,7 @@ This function creates the refractive index profile of an air silica photonic cry
 
 Inputs : 
 * X, Y : spatial mesh
-* FiberParams : Matlab structure with fields : {1} lattice pitch (m), {2} $d\over \Lambda$ parameter, {3} Working wavelength (m), {4} Cladding diameter
+* FiberParams : Matlab structure with fields : Pitch : lattice pitch (m), dop : $d\over \Lambda$ parameter, lambda : Working wavelength (m), Dclad : Cladding diameter
 
 Output : 
 * n : Refractive index map 
@@ -88,7 +140,7 @@ This function creates the refractive index profile of step index fiber, includin
 
 Inputs : 
 * X, Y : spatial mesh
-* FiberParams : Matlab structure with fields : {1} Core diameter (m), {2} Cladding diameter (m), {3} Core numerical apperture , {4} Working wavelength (m)
+* FiberParams : Matlab structure with fields : Dcore : Core diameter (m), Dclad : Cladding diameter (m), NA : Core numerical apperture , lambda : Working wavelength (m)
 
 Output : 
 * n : Refractive index map 
@@ -138,8 +190,8 @@ Outputs :
 Usage :
 ```Matlab
 [neff, LP] = ModeSolver(RIMap, x, y, [OPTIONAL] : 'nModes'(default = 10), nModesValue, 'coreRadius'(default = 5e-6), coreRadiusValue, ...
-                    ... 'lambda'(default = 1064e-9, lambdaValue, 'plot'(default = true), plotValue, 'target'(default = 0), targetValue...
-                    ... 'IndexContour'(default = true), indexContourValue)
+                     'lambda'(default = 1064e-9, lambdaValue, 'plot'(default = true), plotValue, 'target'(default = 0), targetValue...
+                     'IndexContour'(default = true), indexContourValue)
 ```
 
 Description : 
@@ -199,15 +251,18 @@ Output :
 
 # Further improvements
 * Perfecly matched layer to evaluate mode leakage losses (WORK IN PROGRESS)
-* Fiber bending (WORK IN PROGRESS)
+* Fiber bending &#9745;
 
 # References
 * [1] K. N. Park et K. S. Lee, *Improved effective-index method for analysis of photonic crystal fibers*, Opt. Lett., vol. 30, nᵒ 9, p. 958, mai 2005, doi: 10.1364/OL.30.000958.
 
 * [2] T. Gottschall et al., *Ultra‐compact tunable fiber laser for coherent anti‐Stokes Raman imaging*, J Raman Spectrosc, vol. 52, nᵒ 9, p. 1561‑1568, sept. 2021, doi: 10.1002/jrs.6171.
 
-* [3] : Sørensen, S. T. *Deep-blue supercontinuum light sources based on tapered photonic crystal fibers*, PhD thesis, DTU Fotonik ,2013.
-## Citation
+* [3] R. T. Schermer and J. H. Cole, "Improved Bend Loss Formula Verified for Optical Fiber by Simulation and Experiment," in IEEE Journal of Quantum Electronics, vol. 43, no. 10, pp. 899-909, Oct. 2007, doi: 10.1109/JQE.2007.903364.
+
+* [4] : Sørensen, S. T. *Deep-blue supercontinuum light sources based on tapered photonic crystal fibers*, PhD thesis, DTU Fotonik ,2013.
+
+# Citation
 If this code was helpful, please consider citing it : 
 
 

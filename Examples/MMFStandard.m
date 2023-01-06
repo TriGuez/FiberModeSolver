@@ -2,8 +2,10 @@
 clear
 close all
 format long g
-folder = fileparts(which(mfilename)); 
-addpath(genpath(folder));
+[ParentPath, ~, ~] = fileparts(pwd);
+addpath([ParentPath '/RefractiveIndexes']);
+addpath([ParentPath '/Tools']);
+
 
 %% Define the simulation window
 xmax = 150e-6;
@@ -15,10 +17,11 @@ y = x;
 
 %% Define the fiber parameters
 lambda = 1550e-9;
-Dcore = 105e-6;
-Dclad = 125e-6;
-NA = 0.22;
-fiberParams = {Dcore; Dclad; NA; lambda};
+fiberParams.lambda = lambda;
+fiberParams.Dcore = 105e-6;
+fiberParams.Dclad = 125e-6;
+fiberParams.NA = 0.22;
+
 RIndexMap = StepIndex(X, Y, fiberParams);
 % Plot RIMap to check if the simulation window is big enough
 figure()
@@ -29,8 +32,8 @@ colormap gray
 
 %% Run the simulation
 nModes = 5; 
-n_target = sqrt(SilicaIndex(lambda)^2+NA^2); % Since the mode is propagating in the core, its effective index can't be higher than the refractive index
+n_target = sqrt(SilicaIndex(lambda)^2+fiberParams.NA^2); % Since the mode is propagating in the core, its effective index can't be higher than the refractive index
 
 [neff, LP] = ModeSolver(RIndexMap, x, y, 'lambda', lambda, 'nModes', ...
-    nModes, 'coreRadius', Dcore/2, 'target', n_target, 'plot', true, ...
+    nModes, 'coreRadius', fiberParams.Dcore/2, 'target', n_target, 'plot', true, ...
     'IndexContour', true);

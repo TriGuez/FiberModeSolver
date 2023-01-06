@@ -6,22 +6,22 @@ function n = ARFIndex(X,Y, FiberParams)
 %% Outputs : 
 %% - n : Refractive index profile of the fiber
 
-Dclad = FiberParams{1};
-Ncap = FiberParams{2};
-DextCap = FiberParams{3};
-Ecap = FiberParams{4};
-lbd = FiberParams{5};
+Dclad = FiberParams.Dclad;
+NCap = FiberParams.NCap;
+DextCap = FiberParams.DextCap;
+ECap = FiberParams.ECap;
+lbd = FiberParams.lambda;
 
 Rclad = Dclad/2;
 Rcap = DextCap/2;
-RintCap = Rcap - Ecap;
+RintCap = Rcap - ECap;
 alpha = SilicaLosses(lbd)*4.343;
-kappa = (alpha.*log(10)/20)*(FiberParams{5})/(2*pi);
+kappa = (alpha.*log(10)/20)*(lbd)/(2*pi);
 n = (SilicaIndex(lbd)+1i*kappa).*ones(size(X));
 n(X.^2+Y.^2<(Dclad/2).^2) = 1;
-alpha = 2*pi/Ncap;
+alpha = 2*pi/NCap;
 
-for jk = 1:Ncap
+for jk = 1:NCap
     n((X-(Rclad-Rcap).*cos(jk*alpha)).^2 + (Y-(Rclad-Rcap).*sin(jk*alpha)).^2 < Rcap.^2) = SilicaIndex(lbd)+1i*kappa;
     n((X-(Rclad-Rcap).*cos(jk*alpha)).^2 + (Y-(Rclad-Rcap).*sin(jk*alpha)).^2 < RintCap.^2) = 1;
 end

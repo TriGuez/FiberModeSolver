@@ -28,6 +28,7 @@ function [neff, LP] = ModeSolver(RImap, x, y, varargin)
     plot = true ;
     target = 0;
     IndexContour = true;
+    pml = [];
     for ii = 1:2:numel(varargin)
         switch(lower(varargin{ii}))
             case 'nmodes'
@@ -42,6 +43,8 @@ function [neff, LP] = ModeSolver(RImap, x, y, varargin)
                 target = varargin{ii+1};
             case 'indexcontour'
                 IndexContour = varargin{ii+1};
+            case 'pml'
+                pml = varargin{ii+1};
             otherwise
                 error('Unknown argument ''%s'' ', varargin{ii})
         end
@@ -76,7 +79,7 @@ function [neff, LP] = ModeSolver(RImap, x, y, varargin)
         for jk = 1:length(D)
             overlaps(jk) = trapz(y(idx_y_core), trapz(x(idx_x_core),I(idx_x_core,idx_y_core,jk)))./trapz(y,trapz(x,(I(:,:,jk))));
         end
-        coreModeIdxs = find(overlaps > 0.7);
+        coreModeIdxs = find(overlaps > 0.5);
         if isempty(coreModeIdxs)
             fprintf(1,'No core mode found\n')
         else
@@ -95,7 +98,7 @@ function [neff, LP] = ModeSolver(RImap, x, y, varargin)
             Iplot = Iplot./(max(max(Iplot)));
             Iplot = interp2(X,Y,Iplot,X1,Y1,'spline');
             figure(100+jk)
-            imagesc(x.*1e6,y.*1e6,Iplot)
+            imagesc(x.*1e6,y.*1e6,real((Iplot)))
             colormap jet
             if IndexContour
                 cRange = caxis;

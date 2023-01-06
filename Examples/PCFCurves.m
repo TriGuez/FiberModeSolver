@@ -2,8 +2,9 @@
 clear
 close all
 format long g
-folder = fileparts(which(mfilename)); 
-addpath(genpath(folder));
+[ParentPath, ~, ~] = fileparts(pwd);
+addpath([ParentPath '/RefractiveIndexes']);
+addpath([ParentPath '/Tools']);
 
 %% Define the simulation window
 xmax = 50e-6;
@@ -14,11 +15,11 @@ y = x;
 [X,Y] = meshgrid(x,y);
 
 %% Define the fiber parameters
-pitch = 3.2e-6;
-d_over_pitch = 1.4/3.2;
-Dclad = 35e-6;
 lambda = 1064e-9;
-fiberParams = {pitch; d_over_pitch; lambda; Dclad};
+fiberParams.Pitch = 3.2e-6;
+fiberParams.dop = 1.4/3.2;
+fiberParams.Dclad = 35e-6;
+fiberParams.lambda = 1064e-9;
 RIndexMap = PCFIndex(X, Y, fiberParams);
 % Plot RIMap to check if the simulation window is big enough
 figure()
@@ -35,10 +36,10 @@ aeff = zeros(1,256);
 lambda = linspace(500e-9,1800e-9,256);
 for jk = 1:256
     n_target = SilicaIndex(lambda(jk)); % Since the mode is propagating in fused silica, its effective index can't be higher than the refractive index
-    fiberParams = {pitch; d_over_pitch; lambda(jk); Dclad};
+    fiberParams.lambda = lambda(jk);
     RIndexMap = PCFIndex(X, Y, fiberParams);
     [neff, LP] = ModeSolver(RIndexMap, x, y, 'lambda', lambda(jk), 'nModes', ...
-        nModes, 'coreRadius', pitch*2, 'target', n_target, 'plot', false, ...
+        nModes, 'coreRadius', fiberParams.Pitch*2, 'target', n_target, 'plot', false, ...
         'IndexContour', true);
     neffs(jk) = real(neff);
     losses(jk) = (20*imag(neff))./log(10) * 2*pi/lambda(jk);

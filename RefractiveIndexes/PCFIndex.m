@@ -8,15 +8,16 @@ function n = PCFIndex(X,Y, FiberParams)
 %% * n : Refractive index map 
 
 format long g
-pitch = FiberParams{1};
-d_over_pitch = FiberParams{2};
-dclad = FiberParams{4};
+pitch = FiberParams.Pitch;
+d_over_pitch = FiberParams.dop;
+Dclad = FiberParams.Dclad;
 d = d_over_pitch.*pitch;
-n_background = SilicaIndex(FiberParams{3});
+lambda = FiberParams.lambda;
+n_background = SilicaIndex(lambda);
 n = ones(size(X));
-n(X.^2+Y.^2<(dclad/2).^2) = n_background;
-alpha = SilicaLosses(FiberParams{3})*4.343;
-kappa = (alpha.*log(10)/20)*(FiberParams{3})/(2*pi);
+n(X.^2+Y.^2<(Dclad/2).^2) = n_background;
+alpha = SilicaLosses(lambda)*4.343;
+kappa = (alpha.*log(10)/20)*(lambda)/(2*pi);
 n = n + 1i*kappa;
 
 % first ring

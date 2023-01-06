@@ -2,8 +2,9 @@
 clear
 close all
 format long g
-folder = fileparts(which(mfilename)); 
-addpath(genpath(folder));
+[ParentPath, ~, ~] = fileparts(pwd);
+addpath([ParentPath '/RefractiveIndexes']);
+addpath([ParentPath '/Tools']);
 
 %% Define the simulation window
 xmax = 150e-6;
@@ -15,11 +16,11 @@ y = x;
 
 %% Define the fiber parameters
 lambda = 1550e-9;
-Dclad = 95e-6;
-NCapillaries = 5;
-DCapillaries = 25e-6;
-ECapillaries = 1.5e-6;
-fiberParams = {Dclad; NCapillaries; DCapillaries; ECapillaries; lambda}; %ARF
+fiberParams.lambda = lambda;
+fiberParams.Dclad = 95e-6;
+fiberParams.NCap = 6;
+fiberParams.DextCap = 25e-6;
+fiberParams.ECap = 1.5e-6;
 RIndexMap = ARFIndex(X, Y, fiberParams);
 % Plot RIMap to check if the simulation window is big enough
 figure()
