@@ -17,9 +17,9 @@ y = x;
 %% Define the fiber parameters
 lambda = 1064e-9;
 fiberParams.Pitch = 3.2e-6;
-fiberParams.dop = 1.8/3.2;
+fiberParams.dop = 1.45/3.2;
 fiberParams.Dclad = 35e-6;
-fiberParams.lambda = 1064e-9;
+fiberParams.lambda = lambda;
 RIndexMap = PCFIndex(X, Y, fiberParams);
 % Plot RIMap to check if the simulation window is big enough
 figure()
@@ -27,6 +27,7 @@ imagesc(x*1e6, y*1e6, real(RIndexMap)) % Index is complex since it takes materia
 xlabel('x (�m)')
 ylabel('y (�m)')
 colormap gray
+drawnow
 %% Run the simulation
 nModes = 30; 
 n_target = SilicaIndex(lambda); % Since the mode is propagating in fused silica, its effective index can't be higher than the refractive index

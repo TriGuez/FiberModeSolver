@@ -52,13 +52,17 @@ function [neff, LP] = ModeSolver(RImap, x, y, varargin)
     N = length(x);
     h = max(x(2)-x(1), y(2)-y(1));
     k0 = 2*pi/lambda;
+%     sx = pml(:,:,1);
+%     sy = pml(:,:,2);
     target = (target*k0).^2;
     lowerdiag = ones(N^2,1);
     lowerdiag(N:N:end) = 0;
     upperdiag = circshift(lowerdiag,1);
-    Op = ( spdiags(-4/h.^2.*ones(N^2,1)+k0.^2.*((RImap(:)).^2),0,N^2,N^2)+...
+    Op = ( spdiags(-4/h.^2.*ones(N^2,1),0,N^2,N^2)+...
         spdiags((1/h^2).*lowerdiag,-1,N^2,N^2) + spdiags((1/h^2).*upperdiag,1,N^2,N^2) + ...
         spdiags((1/h^2).*ones(N^2,1),-N,N^2,N^2) + spdiags((1/h^2).*ones(N^2,1),N,N^2,N^2));
+%     Op = Op .* spdiags((sx(:)).*(sy(:)),0,N^2,N^2);
+    Op = Op + spdiags(k0.^2.*((RImap(:)).^2),0,N^2,N^2);
     if target ~= 0
         [V,D] = eigs(Op, nModes,target);
     else
