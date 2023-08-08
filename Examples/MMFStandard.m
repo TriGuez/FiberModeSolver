@@ -31,9 +31,9 @@ ylabel('y (µm)')
 colormap gray
 
 %% Run the simulation
-nModes = 5; 
+nModes = 1100; 
 n_target = sqrt(SilicaIndex(lambda)^2+fiberParams.NA^2); % Since the mode is propagating in the core, its effective index can't be higher than the refractive index
 
 [neff, LP] = ModeSolver(RIndexMap, x, y, 'lambda', lambda, 'nModes', ...
-    nModes, 'coreRadius', fiberParams.Dcore/2, 'target', n_target, 'plot', true, ...
+    nModes, 'coreRadius', fiberParams.Dcore/2, 'target', n_target, 'plot', false, ...
     'IndexContour', true);

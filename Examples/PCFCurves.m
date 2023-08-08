@@ -20,6 +20,7 @@ fiberParams.Pitch = 3.2e-6;
 fiberParams.dop = 1.4/3.2;
 fiberParams.Dclad = 35e-6;
 fiberParams.lambda = 1064e-9;
+fiberParams.n_anneaux = 5;
 RIndexMap = PCFIndex(X, Y, fiberParams);
 % Plot RIMap to check if the simulation window is big enough
 figure()
