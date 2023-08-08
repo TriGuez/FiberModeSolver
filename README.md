@@ -4,12 +4,12 @@ This code simulates the propagation modes of various &amp; complex optical fiber
 The solver is based on a finite difference scheme of the following scalar Helmholtz equation : 
 
 $$\big[\Delta_{\perp} + k_{0}^{2}n^{2}(x,y,\omega)\big]\psi(x,y,\omega) = \beta^2(\omega)\psi(x,y,\omega)\ \ \ \ \ \ \ \ \ \  \textbf{(1)}$$
-where $\psi$ is the complex electric field, $\beta$ its corresponding propagation constant, $k_{0} = {{2\pi}\over{\lambda}}$ its wavevector and $n$ the refractive index profile of the fiber.
+where $\psi$ is the complex electric field, $\beta$ its corresponding propagation constant, $k_{0} = {{2\pi}\over{\lambda}}$ its free-space wavevector and $n$ the refractive index profile of the fiber.
 
 In finite difference domain, assuming that spacing $\Delta x = \Delta y = h$, $\Delta_{\perp}\psi$ can be express as : 
 $$\big[\partial_{x}^{2} + \partial_{y}^{2}\big]\psi(x,y) = {1 \over h^2}\big[{f_{p-1,q}+f_{p+1,q}-4f_{p,q}+f_{p,q-1}+f_{p,q+1}}\big]\ \ \ \ \ \ \ \ \ \  \textbf{(2)}$$
 
-Injecting the finite difference scheme into (1) leads to an eigenvalue matrix problem, which can be easily integrate using Matlab function **eigs()**
+Injecting the finite difference scheme into (1) leads to an eigenvalue matrix problem, which can be easily integrated using Matlab function **eigs()**
 
 # Performance comparison
 
