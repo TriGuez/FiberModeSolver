@@ -107,7 +107,7 @@ function [neff, LP] = ModeSolver(RImap, x, y, varargin)
             if IndexContour
                 cRange = caxis;
                 hold on
-                contour(x.*1e6,y.*1e6,real(RImap),'-white')
+                contour(x.*1e6,y.*1e6,real(RImap),'-black')
                 caxis(cRange);
             end
             xlabel('x (\mu m)')
