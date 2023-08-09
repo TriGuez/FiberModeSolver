@@ -17,7 +17,7 @@ y = x;
 %% Define the fiber parameters
 lambda = 1040e-9;
 fiberParams.Pitch = 3.2e-6;
-fiberParams.dop = 0.2;
+fiberParams.dop = 0.25;
 fiberParams.lambda = lambda;
 fiberParams.n_anneaux = 5;
 fiberParams.Dclad = fiberParams.Pitch*(2*fiberParams.n_anneaux+1);
@@ -35,4 +35,4 @@ n_target = SilicaIndex(lambda); % Since the mode is propagating in fused silica,
 
 [neff, LP] = ModeSolver(RIndexMap, x, y, 'lambda', lambda, 'nModes', ...
     nModes, 'coreRadius', fiberParams.Pitch*2, 'target', n_target, 'plot', true, ...
-    'IndexContour', true);
+    'IndexContour', false);

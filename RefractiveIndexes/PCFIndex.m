@@ -82,7 +82,7 @@ for indice_anneau = 1 : n_anneaux
 end
 
 for jk = 1:length(x_holes)
-    n((X-x_holes(jk)).^2 + (Y-y_holes(jk)).^2 < (d/2)^2) = 0;
+    n((X-x_holes(jk)).^2 + (Y-y_holes(jk)).^2 < (d/2)^2) = 1;
 end
 
 
