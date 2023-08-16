@@ -7,9 +7,9 @@ addpath([ParentPath '/RefractiveIndexes']);
 addpath([ParentPath '/Tools']);
 
 %% Define the simulation window
-xmax = 55e-6;
-ymax = 55e-6;
-N = 350;
+xmax = 10e-6;
+ymax = 10e-6;
+N = 250;
 x = linspace(-xmax/2, xmax/2, N);
 y = x;
 [X,Y] = meshgrid(x,y);
@@ -17,9 +17,9 @@ y = x;
 %% Define the fiber parameters
 lambda = 1040e-9;
 fiberParams.Pitch = 3.2e-6;
-fiberParams.dop = 0.25;
+fiberParams.dop = 0.4;
 fiberParams.lambda = lambda;
-fiberParams.n_anneaux = 5;
+fiberParams.n_anneaux = 1;
 fiberParams.Dclad = fiberParams.Pitch*(2*fiberParams.n_anneaux+1);
 RIndexMap = PCFIndex(X, Y, fiberParams);
 % Plot RIMap to check if the simulation window is big enough
