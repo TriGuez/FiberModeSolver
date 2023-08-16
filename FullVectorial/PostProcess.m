@@ -1,4 +1,4 @@
-function [neffs, Ex, Ey, Ez, Hx, Hy, Hz, Sz] = PostProcess(V, D, k0, x, y, eps_rx, eps_ry, eps_rz)
+function [neffs, Ex, Ey, Ez, Hx, Hy, Hz, S] = PostProcess(V, D, k0, x, y, eps_rx, eps_ry, eps_rz)
 
 h = max(x(2)-x(1), y(2)-y(1));
 N = sqrt(length(V(:,1))/2);
@@ -33,6 +33,8 @@ for jk = 1:length(idxs)
     Hxtemp = (1/(1i*betas(jk))) .* (Vx*Hztemp - 1i*k0.*eps_ry*Eytemp);
     Eztemp = (-1/(1i*k0)).*eps_rzm1*(-Vy*Hxtemp + Vx*Hytemp);
     Sztemp = Extemp*Hytemp-Eytemp*Hxtemp;
+    Sytemp = Eztemp*Hxtemp - Extemp*Hztemp;
+    Sxtemp = Eytemp*Hztemp - Eztemp*Hytemp;
     
     Hxtemp = diag(Hxtemp);
     Hx(:,:,jk) = reshape(full(Hxtemp),N,N);
@@ -44,4 +46,9 @@ for jk = 1:length(idxs)
     Ez(:,:,jk) = reshape(full(Eztemp),N,N);
     Sztemp = diag(Sztemp);
     Sz(:,:,jk) = reshape(full(Sztemp),N,N);
+    Sytemp = diag(Sytemp);
+    Sy(:,:,jk) = reshape(full(Sytemp),N,N);
+    Sxtemp = diag(Sxtemp);
+    Sx(:,:,jk) = reshape(full(Sxtemp),N,N);
+    S(:,:,jk) = sqrt(Sx(:,:,jk).*conj(Sx(:,:,jk)) + Sy(:,:,jk).*conj(Sy(:,:,jk)) + Sz(:,:,jk).*conj(Sz(:,:,jk)));
 end
