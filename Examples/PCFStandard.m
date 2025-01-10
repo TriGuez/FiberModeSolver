@@ -17,7 +17,7 @@ y = x;
 %% Define the fiber parameters
 lambda = 1040e-9;
 fiberParams.Pitch = 3.2e-6;
-fiberParams.dop = 0.4;
+fiberParams.dop = 1.4/3.2;
 fiberParams.lambda = lambda;
 fiberParams.n_anneaux = 6;
 fiberParams.Dclad = fiberParams.Pitch*(2*fiberParams.n_anneaux+1);

@@ -26,9 +26,9 @@ type = '4sigma';
                 error('Unknown argument ''%f'' ', varargin{ii});
         end
     end
-    if ~isreal(Field)
-        Field = abs(Field).^2;
-    end
+    %if ~isreal(Field)
+    Field = abs(Field).^2;
+    %end
     Field = Field./(max(max(Field)));
     FT_x = Field(:,length(Field)/2);
     FT_y = Field(length(Field)/2,:);
@@ -52,7 +52,7 @@ type = '4sigma';
             ay = min(idx_x); by = max(idx_y);
             MFD = max((x(bx)-x(ax)),(x(by)-x(ay))) ;
         case '4sigma'
-            MFD = max(4*std(x,FT_x), 4*std(y,FT_y));
+            MFD =2*2*sqrt((trapz(y,trapz(x,x.^2.*Field)))/(trapz(y,trapz(x,Field))));
     end
 end
 
